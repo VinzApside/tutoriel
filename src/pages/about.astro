@@ -1,7 +1,5 @@
 ---
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
 const pageTitle = 'À propos de moi';
 const identity = {
     firstName: 'Anne',
@@ -13,70 +11,41 @@ const skills = ['HTML', 'CSS', 'JavaScript', 'React', 'Astro', 'Rédaction de do
 const happy = true;
 const finished = false;
 const goal = 3;
-
-const skillColor = 'orange';
-const fontWeight = 'bold';
-const textCase = 'upperCase';
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{pageTitle}</title>
-        <style define:vars={{ skillColor, fontWeight, textCase }}>
-            h1 {
-                color: purple;
-                font-size: 4rem;
-            }
-            .skill {
-                color: var(--skillColor);
-                font-weight: var(--fontWeight);
-                text-transform: var(--textCase);
-            }
-        </style>
-    </head>
-    <body>
-        <body>
-            <Header />
-            <h1>{pageTitle}</h1>
-            <h2>... et de mon nouveau site Astro !</h2>
+<BaseLayout pageTitle={pageTitle}>
+    <h2>... et de mon nouveau site Astro !</h2>
 
-            <p>
-                Je suis en train de suivre le tutoriel d'introduction d'Astro. C'est la deuxième page de mon site web, et c'est la première que j'ai
-                construite moi-même !
-            </p>
+    <p>
+        Je suis en train de suivre le tutoriel d'introduction d'Astro. C'est la deuxième page de mon site web, et c'est la première que j'ai
+        construite moi-même !
+    </p>
 
-            <p>
-                Ce site se mettra à jour au fur et à mesure que je compléterai davantage le tutoriel, alors revenez régulièrement voir comment se
-                déroule mon parcours !
-            </p>
+    <p>
+        Ce site se mettra à jour au fur et à mesure que je compléterai davantage le tutoriel, alors revenez régulièrement voir comment se déroule mon
+        parcours !
+    </p>
 
-            <p>Voici quelques faits me concernant :</p>
-            <ul>
-                <li>Je m'appelle {identity.firstName}.</li>
-                <li>Je vis au {identity.country} et je travaille en tant que {identity.occupation}.</li>
-                {
-                    identity.hobbies.length >= 2 && (
-                        <li>
-                            Deux de mes loisirs sont : {identity.hobbies[0]} et {identity.hobbies[1]}
-                        </li>
-                    )
-                }
-            </ul>
-            <p>Voici mes compétences :</p>
-            <ul>
-                {skills.map((skill) => <li class="skill">{skill}</li>)}
-            </ul>
+    <p>Voici quelques faits me concernant :</p>
+    <ul>
+        <li>Je m'appelle {identity.firstName}.</li>
+        <li>Je vis au {identity.country} et je travaille en tant que {identity.occupation}.</li>
+        {
+            identity.hobbies.length >= 2 && (
+                <li>
+                    Deux de mes loisirs sont : {identity.hobbies[0]} et {identity.hobbies[1]}
+                </li>
+            )
+        }
+    </ul>
+    <p>Voici mes compétences :</p>
+    <ul>
+        {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
 
-            {happy && <p>Je suis heureux d'apprendre Astro !</p>}
+    {happy && <p>Je suis heureux d'apprendre Astro !</p>}
 
-            {finished && <p>J'ai terminé ce tutoriel !</p>}
+    {finished && <p>J'ai terminé ce tutoriel !</p>}
 
-            {goal === 3 ? <p>Mon objectif est de terminer en 3 jours.</p> : <p>Mon objectif n'est pas de 3 jours.</p>}
-        </body>
-        <Footer />
-    </body>
-</html>
+    {goal === 3 ? <p>Mon objectif est de terminer en 3 jours.</p> : <p>Mon objectif n'est pas de 3 jours.</p>}
+</BaseLayout>
